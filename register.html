@@ -294,18 +294,31 @@
                 }
 
                 // Save user
-                users.push({
+                const newUser = {
                     id: Date.now(),
                     full_name: fullName,
                     email: email,
                     phone: phone,
                     password: password, // In production, this should be hashed
+                    role: email === 'murerwakimberley@gmail.com' ? 'admin' : 'user',
                     created_at: new Date().toISOString()
-                });
-
+                };
+                
+                users.push(newUser);
                 localStorage.setItem('users', JSON.stringify(users));
-                alert('Account created successfully! You can now login.');
-                window.location.href = 'login.html';
+                
+                // Auto-login after registration
+                setAuthToken('local-token-' + newUser.id);
+                setUserData(newUser);
+                
+                alert('Account created successfully! You are now logged in.');
+                
+                // Redirect based on role
+                if (email === 'murerwakimberley@gmail.com') {
+                    window.location.href = 'admin.html';
+                } else {
+                    window.location.href = 'community.html';
+                }
             }
         });
 

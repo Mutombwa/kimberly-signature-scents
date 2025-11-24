@@ -270,9 +270,9 @@
                 const user = users.find(u => u.email === email && u.password === password);
 
                 if (user) {
-                    // Save to session
-                    localStorage.setItem('authToken', 'local-token-' + user.id);
-                    localStorage.setItem('userData', JSON.stringify(user));
+                    // Save to session using correct keys
+                    setAuthToken('local-token-' + user.id);
+                    setUserData(user);
                     
                     showNotification('Login successful! Redirecting...', 'success');
                     
