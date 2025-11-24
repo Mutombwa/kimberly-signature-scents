@@ -5,16 +5,23 @@ const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
 const navLinks = document.querySelectorAll('.nav-link');
 
-// Check if user is admin and show admin link
-const checkAdminAccess = () => {
-    const userData = localStorage.getItem('userData');
+// Check if user is logged in and update navigation
+const updateNavigation = () => {
+    const userData = localStorage.getItem('user_data');
     const adminLink = document.getElementById('adminLink');
+    const loginLink = document.getElementById('loginLink');
     
-    if (userData && adminLink) {
+    if (userData) {
         try {
             const user = JSON.parse(userData);
-            // Show admin link for admin users (you can adjust this logic)
-            if (user.email === 'murerwakimberley@gmail.com' || user.role === 'admin') {
+            
+            // Hide login link if user is logged in
+            if (loginLink) {
+                loginLink.style.display = 'none';
+            }
+            
+            // Show admin link for admin users only
+            if (adminLink && (user.email === 'murerwakimberley@gmail.com' || user.role === 'admin')) {
                 adminLink.style.display = 'block';
             }
         } catch (e) {
@@ -23,8 +30,8 @@ const checkAdminAccess = () => {
     }
 };
 
-// Check admin access on page load
-checkAdminAccess();
+// Update navigation on page load
+updateNavigation();
 
 // Toggle mobile menu
 hamburger.addEventListener('click', () => {
