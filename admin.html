@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Kimberly Signature Scents</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <i class="fas fa-spray-can"></i>
+                    <span>Kimberly Signature Scents - Admin</span>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="community.html" class="nav-link">Community</a></li>
+                    <li><a href="admin.html" class="nav-link active">Admin Dashboard</a></li>
+                    <li>
+                        <a href="#" class="nav-link" id="logoutLink">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Admin Header -->
+    <section class="admin-header">
+        <div class="container">
+            <h1><i class="fas fa-user-shield"></i> Admin Dashboard</h1>
+            <p>Manage your business platform</p>
+            <div class="admin-welcome">
+                <span id="adminName">Welcome, Admin</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Stats -->
+    <section class="dashboard-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalUsers">0</h3>
+                        <p>Total Users</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalRegistrations">0</h3>
+                        <p>Registrations</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalPosts">0</h3>
+                        <p>Community Posts</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalAnnouncements">0</h3>
+                        <p>Announcements</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Tabs -->
+    <section class="admin-content">
+        <div class="container">
+            <div class="admin-tabs">
+                <button class="tab-btn active" data-tab="announcements">
+                    <i class="fas fa-bullhorn"></i> Announcements
+                </button>
+                <button class="tab-btn" data-tab="rates">
+                    <i class="fas fa-exchange-alt"></i> Exchange Rates
+                </button>
+                <button class="tab-btn" data-tab="products">
+                    <i class="fas fa-box"></i> Products & Images
+                </button>
+                <button class="tab-btn" data-tab="registrations">
+                    <i class="fas fa-clipboard-list"></i> Registrations
+                </button>
+                <button class="tab-btn" data-tab="settings">
+                    <i class="fas fa-cog"></i> Settings
+                </button>
+            </div>
+
+            <!-- Announcements Tab -->
+            <div class="tab-content active" id="announcements">
+                <div class="content-header">
+                    <h2><i class="fas fa-bullhorn"></i> Post Announcements</h2>
+                    <p>Share important updates, new products, special offers, or any information with your community</p>
+                </div>
+
+                <div class="announcement-form-card">
+                    <form id="announcementForm">
+                        <div class="form-group">
+                            <label for="announcementTitle">
+                                <i class="fas fa-heading"></i> Announcement Title
+                            </label>
+                            <input type="text" id="announcementTitle" required placeholder="e.g., New Product Launch, Special Offer, Important Update">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="announcementCategory">
+                                <i class="fas fa-tag"></i> Category
+                            </label>
+                            <select id="announcementCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="new_product">New Product</option>
+                                <option value="special_offer">Special Offer</option>
+                                <option value="new_orders">New Orders Available</option>
+                                <option value="price_update">Price Update</option>
+                                <option value="general_update">General Update</option>
+                                <option value="important">Important Notice</option>
+                                <option value="event">Event Announcement</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="announcementContent">
+                                <i class="fas fa-align-left"></i> Content
+                            </label>
+                            <textarea id="announcementContent" rows="6" required placeholder="Write your announcement here..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="announcementImage">
+                                <i class="fas fa-image"></i> Image (Optional)
+                            </label>
+                            <input type="file" id="announcementImage" accept="image/*">
+                            <small>Upload an image to accompany your announcement</small>
+                            <div id="imagePreview" class="image-preview"></div>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label>
+                                <input type="checkbox" id="isPinned">
+                                <span><i class="fas fa-thumbtack"></i> Pin this announcement to the top</span>
+                            </label>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label>
+                                <input type="checkbox" id="notifyUsers">
+                                <span><i class="fas fa-bell"></i> Notify all users via WhatsApp (Coming Soon)</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Post Announcement
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Recent Announcements -->
+                <div class="recent-announcements">
+                    <h3><i class="fas fa-history"></i> Recent Announcements</h3>
+                    <div id="announcementsList" class="announcements-list">
+                        <!-- Announcements will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exchange Rates Tab -->
+            <div class="tab-content" id="rates">
+                <div class="content-header">
+                    <h2><i class="fas fa-exchange-alt"></i> Currency Exchange Rates</h2>
+                    <p>Update daily exchange rates between ZAR (Rands) and USD (Dollars)</p>
+                </div>
+
+                <div class="rates-card">
+                    <div class="current-rates">
+                        <h3><i class="fas fa-chart-line"></i> Current Rates</h3>
+                        <div class="rate-display">
+                            <div class="rate-item">
+                                <span class="currency">1 USD</span>
+                                <i class="fas fa-equals"></i>
+                                <span class="value" id="currentRate">17.00 ZAR</span>
+                            </div>
+                            <div class="rate-meta">
+                                <small>Last updated: <span id="lastUpdated">Never</span></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="ratesForm">
+                        <div class="form-group">
+                            <label for="usdToZar">
+                                <i class="fas fa-dollar-sign"></i> 1 USD = ? ZAR
+                            </label>
+                            <input type="number" id="usdToZar" step="0.01" min="0" required placeholder="Enter exchange rate (e.g., 17.50)">
+                            <small>Enter how many South African Rands (ZAR) equal 1 US Dollar (USD)</small>
+                        </div>
+
+                        <div class="converter-preview">
+                            <h4><i class="fas fa-calculator"></i> Quick Converter Preview</h4>
+                            <div class="converter-grid">
+                                <div class="convert-item">
+                                    <span>R 600</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                    <span class="converted" id="conv600">$36</span>
+                                </div>
+                                <div class="convert-item">
+                                    <span>R 1,300</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                    <span class="converted" id="conv1300">$77</span>
+                                </div>
+                                <div class="convert-item">
+                                    <span>R 1,800</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                    <span class="converted" id="conv1800">$106</span>
+                                </div>
+                                <div class="convert-item">
+                                    <span>R 3,000</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                    <span class="converted" id="conv3000">$177</span>
+                                </div>
+                                <div class="convert-item">
+                                    <span>R 6,000</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                    <span class="converted" id="conv6000">$353</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Update Exchange Rate
+                        </button>
+                    </form>
+
+                    <!-- Rate History -->
+                    <div class="rate-history">
+                        <h3><i class="fas fa-history"></i> Rate History</h3>
+                        <div id="rateHistoryList" class="rate-history-list">
+                            <!-- Rate history will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products & Images Tab -->
+            <div class="tab-content" id="products">
+                <div class="content-header">
+                    <h2><i class="fas fa-box"></i> Products & Image Gallery</h2>
+                    <p>Upload and manage product images for your website</p>
+                </div>
+
+                <div class="upload-card">
+                    <form id="productImageForm">
+                        <div class="form-group">
+                            <label for="productName">
+                                <i class="fas fa-tag"></i> Product Name
+                            </label>
+                            <input type="text" id="productName" required placeholder="e.g., Signature Perfume Collection">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productDescription">
+                                <i class="fas fa-align-left"></i> Description
+                            </label>
+                            <textarea id="productDescription" rows="3" placeholder="Brief product description"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productImages">
+                                <i class="fas fa-images"></i> Upload Images
+                            </label>
+                            <input type="file" id="productImages" accept="image/*" multiple>
+                            <small>You can select multiple images at once</small>
+                            <div id="productImagePreview" class="image-preview-grid"></div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-upload"></i> Upload Product Images
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Current Product Gallery -->
+                <div class="current-products">
+                    <h3><i class="fas fa-th"></i> Current Product Gallery</h3>
+                    <div id="productGallery" class="product-gallery">
+                        <!-- Products will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registrations Tab -->
+            <div class="tab-content" id="registrations">
+                <div class="content-header">
+                    <h2><i class="fas fa-clipboard-list"></i> Customer Registrations</h2>
+                    <p>View and manage all customer registration submissions</p>
+                </div>
+
+                <div class="registrations-filters">
+                    <div class="filter-group">
+                        <label>Status Filter:</label>
+                        <select id="statusFilter">
+                            <option value="all">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="contacted">Contacted</option>
+                            <option value="paid">Paid</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Search:</label>
+                        <input type="text" id="searchRegistrations" placeholder="Search by name, email, or phone...">
+                    </div>
+                </div>
+
+                <div class="registrations-table-container">
+                    <table class="registrations-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Kit Choice</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="registrationsTableBody">
+                            <!-- Registrations will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div class="tab-content" id="settings">
+                <div class="content-header">
+                    <h2><i class="fas fa-cog"></i> System Settings</h2>
+                    <p>Configure your platform settings</p>
+                </div>
+
+                <div class="settings-grid">
+                    <div class="setting-card">
+                        <h3><i class="fas fa-palette"></i> Theme Settings</h3>
+                        <form id="themeForm">
+                            <div class="form-group">
+                                <label>Primary Color</label>
+                                <input type="color" id="primaryColor" value="#d4af37">
+                            </div>
+                            <div class="form-group">
+                                <label>Secondary Color</label>
+                                <input type="color" id="secondaryColor" value="#1a1a1a">
+                            </div>
+                            <button type="submit" class="btn btn-secondary">Save Theme</button>
+                        </form>
+                    </div>
+
+                    <div class="setting-card">
+                        <h3><i class="fas fa-bell"></i> Notification Settings</h3>
+                        <form id="notificationForm">
+                            <div class="form-group checkbox-group">
+                                <label>
+                                    <input type="checkbox" id="emailNotifications" checked>
+                                    <span>Email notifications for new registrations</span>
+                                </label>
+                            </div>
+                            <div class="form-group checkbox-group">
+                                <label>
+                                    <input type="checkbox" id="whatsappNotifications">
+                                    <span>WhatsApp notifications (Coming Soon)</span>
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-secondary">Save Notifications</button>
+                        </form>
+                    </div>
+
+                    <div class="setting-card">
+                        <h3><i class="fas fa-database"></i> Data Management</h3>
+                        <button class="btn btn-secondary" id="exportData">
+                            <i class="fas fa-download"></i> Export All Data
+                        </button>
+                        <button class="btn btn-danger" id="clearCache">
+                            <i class="fas fa-trash"></i> Clear Cache
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Detail Modal -->
+    <div class="modal" id="registrationModal">
+        <div class="modal-content large">
+            <button class="modal-close">&times;</button>
+            <h2><i class="fas fa-user"></i> Registration Details</h2>
+            <div id="registrationDetails"></div>
+            <div class="modal-actions">
+                <select id="updateStatus" class="status-select">
+                    <option value="pending">Pending</option>
+                    <option value="contacted">Contacted</option>
+                    <option value="paid">Paid</option>
+                    <option value="completed">Completed</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+                <button class="btn btn-primary" id="saveStatus">
+                    <i class="fas fa-save"></i> Update Status
+                </button>
+                <a id="whatsappContact" class="btn btn-success" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Contact via WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

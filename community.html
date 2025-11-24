@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Platform | Kimberly Signature Scents</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="community.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <i class="fas fa-spray-can"></i>
+                    <span>Kimberly Signature Scents</span>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="community.html" class="nav-link active">Community</a></li>
+                    <li><a href="dashboard.html" class="nav-link" id="dashboardLink" style="display:none;">Dashboard</a></li>
+                    <li id="authSection">
+                        <a href="login.html" class="nav-link" id="loginLink">Login</a>
+                        <a href="register.html" class="nav-link" id="registerLink">Register</a>
+                        <a href="#" class="nav-link" id="logoutLink" style="display:none;">Logout</a>
+                    </li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Community Header -->
+    <section class="community-header">
+        <div class="container">
+            <h1><i class="fas fa-users"></i> Community Platform</h1>
+            <p>Connect, share, and grow together with fellow entrepreneurs</p>
+            <div id="guestWelcome" style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin: 20px 0; display: none;">
+                <p style="margin: 0; color: white;">👋 <strong>Welcome!</strong> You're browsing as a guest. <a href="register.html" style="color: var(--gold); text-decoration: underline;">Create a free account</a> to post, comment, and interact with the community!</p>
+            </div>
+            <button class="btn btn-primary" id="createPostBtn" style="display:none;">
+                <i class="fas fa-plus"></i> Create New Post
+            </button>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="community-main">
+        <div class="container">
+            <div class="community-layout">
+                <!-- Sidebar -->
+                <aside class="community-sidebar">
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-filter"></i> Categories</h3>
+                        <ul class="category-list" id="categoryList">
+                            <li class="active" data-category="all">
+                                <i class="fas fa-th"></i> All Posts
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-card stats-card">
+                        <h3><i class="fas fa-chart-line"></i> Community Stats</h3>
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalUsers">0</div>
+                            <div class="stat-label">Members</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalPosts">0</div>
+                            <div class="stat-label">Posts</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalComments">0</div>
+                            <div class="stat-label">Comments</div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Posts Feed -->
+                <main class="posts-feed">
+                    <div class="feed-header">
+                        <h2 id="feedTitle">All Posts</h2>
+                        <div class="feed-actions">
+                            <button class="btn-icon" title="Refresh">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="postsContainer" class="posts-container">
+                        <!-- Posts will be loaded here -->
+                        <div class="loading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Loading posts...</p>
+                        </div>
+                    </div>
+
+                    <div class="pagination" id="pagination" style="display:none;">
+                        <button class="btn" id="prevPage">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </button>
+                        <span id="pageInfo">Page 1</span>
+                        <button class="btn" id="nextPage">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- Create/Edit Post Modal -->
+    <div class="modal" id="postModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">
+                    <i class="fas fa-edit"></i> Create New Post
+                </h3>
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="postForm">
+                <div class="form-group">
+                    <label for="postTitle">
+                        <i class="fas fa-heading"></i> Title *
+                    </label>
+                    <input type="text" id="postTitle" required maxlength="200" placeholder="Enter post title...">
+                </div>
+
+                <div class="form-group">
+                    <label for="postCategory">
+                        <i class="fas fa-folder"></i> Category *
+                    </label>
+                    <select id="postCategory" required>
+                        <option value="">Select a category</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="postContent">
+                        <i class="fas fa-align-left"></i> Content *
+                    </label>
+                    <textarea id="postContent" required rows="8" placeholder="Share your thoughts, insights, or questions..."></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelPost">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Publish Post
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Post Detail Modal -->
+    <div class="modal" id="postDetailModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content large">
+            <div class="modal-header">
+                <button class="modal-close" id="closeDetailModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="postDetailContent">
+                <!-- Post detail will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">
+                        <i class="fas fa-spray-can"></i> Kimberly Signature Scents
+                    </h3>
+                    <p class="footer-description">
+                        Premium fragrances and business opportunities by Inuka by Kiki.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="community.html">Community</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="register.html">Register</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Kimberly Signature Scents. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="api.js"></script>
+    <script src="community.js"></script>
+</body>
+</html>
