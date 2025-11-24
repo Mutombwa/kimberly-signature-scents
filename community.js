@@ -56,9 +56,11 @@ function setupEventListeners() {
 
     // Click outside modal to close
     document.querySelectorAll('.modal-overlay').forEach(overlay => {
-        overlay.addEventListener('click', () => {
-            closePostModal();
-            closeDetailModal();
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                closePostModal();
+                closeDetailModal();
+            }
         });
     });
 
@@ -372,6 +374,7 @@ function closeDetailModal() {
 // Handle post submission
 async function handlePostSubmit(e) {
     e.preventDefault();
+    e.stopPropagation();
 
     const postData = {
         title: document.getElementById('postTitle').value,
@@ -379,14 +382,20 @@ async function handlePostSubmit(e) {
         category: document.getElementById('postCategory').value
     };
 
+    console.log('Creating post:', postData);
+
     try {
         const result = await CommunityAPI.createPost(postData);
+        console.log('Post result:', result);
         if (result.success) {
             showNotification('Post created successfully!', 'success');
             closePostModal();
             loadPosts();
+        } else {
+            showNotification(result.message || 'Error creating post', 'error');
         }
     } catch (error) {
+        console.error('Post creation error:', error);
         showNotification(error.message || 'Error creating post', 'error');
     }
 }
